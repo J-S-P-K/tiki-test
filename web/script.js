@@ -1,14 +1,12 @@
-const API = "http://localhost:5000/tortas";
+const API = "/api/tortas";
 
 let carrito = [];
 
-// AGREGAR PRODUCTO
 function agregar(nombre, precio){
   carrito.push({nombre, precio});
   mostrar();
 }
 
-// MOSTRAR CARRITO
 function mostrar(){
   let lista = document.getElementById("lista");
   let total = 0;
@@ -23,14 +21,15 @@ function mostrar(){
   document.getElementById("total").innerText = "Total: $" + total;
 }
 
-// ENVIAR A API
-function enviar(){
+async function enviar(){
 
   let nombre = document.getElementById("nombre").value;
   let detalles = document.getElementById("detalles").value;
 
-  carrito.forEach(p => {
-    fetch(API, {
+  if(carrito.length === 0) return;
+
+  for (const p of carrito) {
+    await fetch(API, {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
@@ -40,34 +39,32 @@ function enviar(){
         precio: p.precio
       })
     });
-  });
+  }
 
   carrito = [];
   mostrar();
-  cargar();
+  await cargar();
+
+  document.getElementById("nombre").value = "";
+  document.getElementById("detalles").value = "";
 
   alert("Pedido enviado");
 }
 
-// CARGAR DATOS
-function cargar(){
-  fetch(API)
-    .then(r => r.json())
-    .then(data => {
+async function cargar(){
+  let r = await fetch(API);
+  let data = await r.json();
 
-      let d = document.getElementById("datos");
-      d.innerHTML = "";
+  let d = document.getElementById("datos");
+  d.innerHTML = "";
 
-      data.forEach(x => {
-        d.innerHTML += `
-          <p>
-            ${x[1]} - ${x[2]} - ${x[3]} - $${x[4]}
-          </p>
-        `;
-      });
-
-    });
+  data.forEach(x => {
+    d.innerHTML += `
+      <p>
+        ${x[1]} - ${x[2]} - ${x[3]} - $${x[4]}
+      </p>
+    `;
+  });
 }
 
-// CARGAR AL INICIO
 cargar();

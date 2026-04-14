@@ -2,21 +2,21 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tienda de Tortas</title>
+<link rel="stylesheet" href="estilos.css">
 </head>
 
 <body>
 
 <h1>Dulces Delicias</h1>
 
-<!-- PRODUCTOS -->
 <h2>Productos</h2>
 
 <button onclick="agregar('Mini torta',1500)">Mini torta $1500</button>
 <button onclick="agregar('Cake cabsha',800)">Cake cabsha $800</button>
 <button onclick="agregar('Donita',200)">Donita $200</button>
 
-<!-- PEDIDO -->
 <h2>Pedido</h2>
 
 <input id="nombre" placeholder="Tu nombre">
@@ -27,7 +27,6 @@
 
 <button onclick="enviar()">Enviar pedido</button>
 
-<!-- DATOS GUARDADOS -->
 <h2>Pedidos guardados</h2>
 <div id="datos"></div>
 

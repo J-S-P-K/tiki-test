@@ -4,9 +4,12 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: heroes_db
+      POSTGRES_DB: tortas_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
 
   backend:
     image: python:3.11
@@ -16,6 +19,7 @@ services:
     command: sh -c "pip install flask psycopg2-binary && python app.py"
     depends_on:
       - db
+    restart: always
 
   nginx:
     image: nginx:latest
@@ -26,3 +30,7 @@ services:
       - "8080:80"
     depends_on:
       - backend
+    restart: always
+
+volumes:
+  db_data:
