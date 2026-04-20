@@ -3,34 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--  Título de la página -->
 <title>Tienda de Tortas</title>
-<link rel="stylesheet" href="estilos.css">
+
+<!--  Conecto mi archivo CSS para los estilos -->
+<link rel="stylesheet" href="estilo.css">
 </head>
 
 <body>
 
-<h1>Dulces Delicias</h1>
+<!--  Contenedor principal de toda la página -->
+<div class="contenedor">
 
-<h2>Productos</h2>
+  <!-- Encabezado con el nombre del emprendimiento -->
+  <div class="header">
+    <h1>Dulces Delicias</h1>
 
-<button onclick="agregar('Mini torta',1500)">Mini torta $1500</button>
-<button onclick="agregar('Cake cabsha',800)">Cake cabsha $800</button>
-<button onclick="agregar('Donita',200)">Donita $200</button>
+    <!--  Icono de menú (solo visual por ahora) -->
+    <div class="menu-icon">☰</div>
+  </div>
 
-<h2>Pedido</h2>
+  <!--  Sección donde muestro todos los productos -->
+  <div class="productos">
 
-<input id="nombre" placeholder="Tu nombre">
-<input id="detalles" placeholder="Detalles">
+    <!--  Producto 1 -->
+    <div class="producto">
+      <h2>Torta de Chocolate</h2>
 
-<div id="lista"></div>
-<p id="total">Total: $0</p>
+      <!--  Precio del producto -->
+      <p class="precio">1500</p>
 
-<button onclick="enviar()">Enviar pedido</button>
+      <!--  Botón para seleccionar el producto -->
+      <button class="pedir">Pedir</button>
+    </div>
 
-<h2>Pedidos guardados</h2>
-<div id="datos"></div>
+    <!--  Producto 2 -->
+    <div class="producto">
+      <h2>Mousse de Frutilla</h2>
+      <p class="precio">800</p>
+      <button class="pedir">Pedir</button>
+    </div>
 
+    <!--  Producto 3 -->
+    <div class="producto">
+      <h2>Donita Normal</h2>
+      <p class="precio">200</p>
+      <button class="pedir">Pedir</button>
+    </div>
+
+  </div>
+
+  <!--  Sección de pedido (no se usa mucho, queda oculta) -->
+  <div class="pedido oculto">
+
+    <!--  Acá podría mostrarse el nombre del producto -->
+    <h3 class="nombre"></h3>
+
+    <!--  Acá el precio final -->
+    <p class="precioFinal"></p>
+
+    <!--  Input para ingresar un monto (opcional) -->
+    <input type="number" class="monto" placeholder="Monto">
+
+    <!--  Botón para enviar -->
+    <button class="enviar">Enviar</button>
+  </div>
+
+</div>
+
+<!--  Formulario que aparece cuando el usuario elige un producto -->
+<div class="formulario oculto">
+
+  <h2>Confirmar Pedido</h2>
+
+  <!--  Input para que el usuario escriba su nombre -->
+  <input type="text" class="input nombre" placeholder="Tu nombre completo">
+
+  <!--  Input que se completa automáticamente con el producto -->
+  <input type="text" class="input productoInput" placeholder="Producto" readonly>
+
+  <!--  Área para que el usuario agregue detalles -->
+  <textarea class="input detalles" placeholder="Detalles"></textarea>
+
+  <!--  Input del precio (se completa solo) -->
+  <input type="text" class="input precioInput" placeholder="Precio" readonly>
+
+  <!-- Botón para enviar el pedido -->
+  <button class="enviar">Enviar Pedido</button>
+
+</div>
+
+<!--  Conecto mi archivo JavaScript -->
 <script src="script.js"></script>
 
 </body>
-</html>
+</html> 
