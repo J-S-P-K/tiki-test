@@ -70,9 +70,9 @@ function mostrar(){
 
 
 //  Evento para enviar el pedido
-document.querySelector(".enviar").addEventListener("click", async () => {
-
-  const nombre = document.querySelector(".nombre").value;
+document.querySelector(".formulario .enviar").addEventListener("click", async () => {
+  const nombre = document.querySelector(".formulario .nombre").value;
+  
   const detalles = document.querySelector(".detalles").value;
 
   //  Validación
