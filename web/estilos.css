@@ -1,84 +1,118 @@
-body{
-  margin:0;
-  font-family:Arial;
-  background:#fff0f5;
+
+/*  Estilos generales del body */
+body {
+  margin: 0; /* saco el margen por defecto */
+  font-family: Arial, sans-serif; /* fuente */
+  background: linear-gradient(135deg, #ff9ecf, #ffc1e3); /* fondo degradado */
 }
 
-/* HEADER */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 20px;
-  background:#ff69b4;
-  color:white;
+/*  Header */
+.header {
+  background: #ff4fa3; /* color de fondo */
+  color: white; /* texto blanco */
+  display: flex; /* uso flex */
+  justify-content: space-between; /* separo elementos */
+  padding: 15px; /* espacio interno */
+  align-items: center; /* centro vertical */
 }
 
-/* PRODUCTOS */
-.products{
-  padding:20px;
+/*  Redes */
+.redes {
+  display: flex; /* elementos en línea */
+  justify-content: space-around; /* espacio entre ellos */
+  color: #ff4fa3; /* color texto */
+  font-weight: bold; /* negrita */
+  padding: 10px; /* espacio */
 }
 
-.product{
-  background:#fff0f5;
-  border:2px solid #ff69b4;
-  margin-bottom:10px;
-  padding:15px;
-  border-radius:15px;
+/*  Productos en cuadrícula */
+.productos {
+  display: grid; /* uso grid */
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+  gap: 15px; /* espacio entre productos */
+  padding: 15px; /* espacio interno */
 }
 
-.product button{
-  background:#ff69b4;
-  color:white;
-  border:none;
-  padding:8px;
-  border-radius:8px;
+/* Tarjetas */
+.producto {
+  background: white; /* fondo blanco */
+  border-radius: 15px; /* bordes redondeados */
+  padding: 15px; /* espacio interno */
+  text-align: center; /* texto centrado */
+  border: 2px solid #ff4fa3; /* borde rosa */
+  transition: 0.3s; /* animación */
 }
 
-/* PEDIDO */
-.orders{
-  padding:20px;
-  background:#ffe4ec;
-  border-radius:15px;
-  margin:20px;
+/*  Producto seleccionado */
+.producto.activo {
+  background: #ffe0f0; /* fondo más claro */
+  border: 3px solid #ff0080; /* borde más fuerte */
 }
 
-.orders input{
-  width:100%;
-  padding:8px;
-  margin-bottom:8px;
-  border:1px solid #ff69b4;
-  border-radius:8px;
+/*  Botones */
+button {
+  background: #ff4fa3; /* color */
+  color: white; /* texto */
+  border: none; /* sin borde */
+  padding: 10px; /* tamaño */
+  border-radius: 10px; /* redondeado */
 }
 
-.orders button{
-  width:100%;
-  padding:10px;
-  background:#ff69b4;
-  color:white;
-  border:none;
-  border-radius:8px;
+/*  Pedido */
+.pedido {
+  background: white; /* fondo */
+  margin: 15px; /* margen */
+  padding: 15px; /* espacio */
+  border-radius: 15px; /* bordes */
+  text-align: center; /* centrado */
 }
 
-/* LISTA */
-#listaPedido div{
-  background:white;
-  padding:10px;
-  margin-bottom:6px;
-  border-radius:10px;
-  border:1px solid #ff69b4;
+/*  Clase para ocultar */
+.oculto {
+  display: none; /* oculta elementos */
 }
 
-#totalPedido{
-  font-weight:bold;
-  color:#ff1493;
+/*  Formulario */
+.formulario {
+  background: #f7f2f4; /* fondo suave */
+  margin: 15px; /* margen */
+  padding: 15px; /* espacio */
+  border-radius: 15px; /* bordes */
 }
 
-/* API */
-.torta-item{
-  background:white;
-  padding:10px;
-  margin-top:5px;
-  border-radius:10px;
-  border:1px solid #ff69b4;
+/*  Título del formulario */
+.formulario h2 {
+  margin-bottom: 15px; /* espacio abajo */
+}
+
+/*  Inputs */
+.input {
+  width: 100%; /* ocupa todo */
+  margin-bottom: 15px; /* espacio abajo */
+  padding: 12px; /* tamaño */
+  border-radius: 10px; /* redondeado */
+  border: 2px solid #ff4fa3; /* borde */
+  font-size: 16px; /* tamaño texto */
+}
+
+/*  Textarea */
+textarea.input {
+  height: 80px; /* alto */
+  resize: none; /* no se puede agrandar */
+}
+
+/*  Botón enviar */
+.enviar {
+  width: 100%; /* ancho completo */
+  background: #ff4fa3; /* color */
+  color: white; /* texto */
+  padding: 15px; /* tamaño */
+  border-radius: 12px; /* bordes */
+  border: none; /* sin borde */
+  font-size: 18px; /* texto grande */
+}
+
+/*  Oculto (repetido, pero lo dejo tal cual estaba) */
+.oculto {
+  display: none;
 }
