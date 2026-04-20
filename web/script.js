@@ -1,15 +1,59 @@
+
+//  Guardo la URL de la API donde se envían los pedidos
 const API = "/api/tortas";
 
+//  Variable para guardar el producto seleccionado visualmente
+let seleccionado = null;
+
+//  Carrito donde voy guardando lo que el usuario pide
 let carrito = [];
 
-function agregar(nombre, precio){
-  carrito.push({nombre, precio});
-  mostrar();
-}
 
+//  Selecciono todos los productos y el formulario
+const productos = document.querySelectorAll(".producto");
+const form = document.querySelector(".formulario");
+
+
+//  Recorro cada producto para agregarle el evento al botón
+productos.forEach(prod => {
+  const btn = prod.querySelector(".pedir");
+
+  btn.addEventListener("click", () => {
+
+    //  Quito la selección anterior
+    productos.forEach(p => p.classList.remove("activo"));
+
+    //  Marco el producto actual como seleccionado
+    prod.classList.add("activo");
+
+    //  Guardo los datos del producto
+    seleccionado = {
+      nombre: prod.querySelector("h2").innerText,
+      precio: parseInt(prod.querySelector(".precio").innerText)
+    };
+
+    //  Agrego automáticamente al carrito
+    carrito.push(seleccionado);
+
+    //  Muestro el carrito abajo
+    mostrar();
+
+    //  Muestro el formulario
+    form.classList.remove("oculto");
+
+    //  Completo los datos automáticamente
+    document.querySelector(".productoInput").value = seleccionado.nombre;
+    document.querySelector(".precioInput").value = "$" + seleccionado.precio;
+  });
+});
+
+
+//  Función para mostrar lo que hay en el carrito
 function mostrar(){
   let lista = document.getElementById("lista");
   let total = 0;
+
+  if(!lista) return;
 
   lista.innerHTML = "";
 
@@ -18,16 +62,31 @@ function mostrar(){
     total += p.precio;
   });
 
-  document.getElementById("total").innerText = "Total: $" + total;
+  let totalHTML = document.getElementById("total");
+  if(totalHTML){
+    totalHTML.innerText = "Total: $" + total;
+  }
 }
 
-async function enviar(){
 
-  let nombre = document.getElementById("nombre").value;
-  let detalles = document.getElementById("detalles").value;
+//  Evento para enviar el pedido
+document.querySelector(".enviar").addEventListener("click", async () => {
 
-  if(carrito.length === 0) return;
+  const nombre = document.querySelector(".nombre").value;
+  const detalles = document.querySelector(".detalles").value;
 
+  //  Validación
+  if (!nombre) {
+    alert("Ingresá tu nombre");
+    return;
+  }
+
+  if(carrito.length === 0){
+    alert("Seleccioná un producto");
+    return;
+  }
+
+  //  Envío cada producto a la API
   for (const p of carrito) {
     await fetch(API, {
       method: "POST",
@@ -41,21 +100,36 @@ async function enviar(){
     });
   }
 
+  //  Mensaje final
+  alert(
+    "Pedido enviado:\n" +
+    "Cliente: " + nombre +
+    "\nProducto: " + carrito.map(p => p.nombre).join(", ") +
+    "\nDetalles: " + detalles +
+    "\nTotal: $" + carrito.reduce((acc, p) => acc + p.precio, 0)
+  );
+
+  //  Limpio todo después de enviar
   carrito = [];
   mostrar();
   await cargar();
 
-  document.getElementById("nombre").value = "";
-  document.getElementById("detalles").value = "";
+  form.classList.add("oculto");
+  document.querySelector(".nombre").value = "";
+  document.querySelector(".detalles").value = "";
 
-  alert("Pedido enviado");
-}
+  productos.forEach(p => p.classList.remove("activo"));
+});
 
+
+//  Función para traer los pedidos guardados desde la API
 async function cargar(){
   let r = await fetch(API);
   let data = await r.json();
 
   let d = document.getElementById("datos");
+  if(!d) return;
+
   d.innerHTML = "";
 
   data.forEach(x => {
@@ -67,4 +141,6 @@ async function cargar(){
   });
 }
 
+
+//  Se ejecuta cuando carga la página
 cargar();
