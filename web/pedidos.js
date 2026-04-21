@@ -32,5 +32,5 @@ async function cargarPedidos(){
 }
 
 //  ejecutar
-cargarPedidos();
 }
+cargarPedidos();
