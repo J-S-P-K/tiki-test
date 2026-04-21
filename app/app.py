@@ -15,7 +15,7 @@ def conn():
             )
         except:
             time.sleep(2)
-    raise Exception("DB no disponible")
+    raise Exception("No se logró conectar a la base de datos")
 
 @app.route("/tortas", methods=["GET"])
 def get_tortas():
